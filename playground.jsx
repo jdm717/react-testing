@@ -55,7 +55,7 @@ var ListGroupItem = ReactBootstrap.ListGroupItem;
 var json;
 
 function reqListener(e) {
-	json = {};
+	json = JSON.parse(this.responseText);
 	setup();
 }
 

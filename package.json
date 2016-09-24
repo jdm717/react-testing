@@ -6,6 +6,7 @@
   "devDependencies": {
     "babel-polyfill": "*",
     "babel-preset-es2015": "*",
-    "babel-preset-react": "*"
+    "babel-preset-react": "*",
+    "browserify": "^13.0.0"
   }
 }
