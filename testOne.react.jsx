@@ -10,6 +10,6 @@ var buttonScreen = React.createClass({
 
 function createTOneRc(){
 	var label = document.getElementById("screen");
-	React.render(buttonScreen,label);
+	React.render(<buttonScreen/>,label);
 
 }
