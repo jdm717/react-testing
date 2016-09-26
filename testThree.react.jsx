@@ -27,9 +27,13 @@ function reqListener(e) {
 	folderData = createSingleDepthArray_t3r(json);
 	initialFolderData = createZeroDepthArray_t3r(json);
 
+	logCurrentTime_t3r();
 	React.render(<TreeNodeList data={initialFolderData}/>,
 					document.getElementById("content"));
+	logCurrentTime_t3r();
 }
+
+var date;
 
 var TreeNodeList = React.createClass({
 	propTypes: {
@@ -60,9 +64,9 @@ var TreeNodeList = React.createClass({
 
 
 		return (
-			<Grid>
+			<div style={{paddingLeft: "10px"}}>
 				{nodes}
-			</Grid>
+			</div>
 		);
 	}
 });
@@ -96,15 +100,17 @@ var TreeNode = React.createClass({
 	},
 	_handleExpand: function() {
 		if(!this.props.node.expanded) {
-			updateTreeNode(this.props.node, true);
+			updateTreeNode_t3r(this.props.node, true);
 		}
 		else {
-			updateTreeNode(this.props.node, false);
+			updateTreeNode_t3r(this.props.node, false);
 		}
 		this.forceUpdate();
 	}
 });
 
+// Method currently duplicated in both testThree.react and testThree
+// Will be added to a shared utility file when both use the same html page
 function createSingleDepthArray_t3r(data) {
 	var arr = [];
 
@@ -122,6 +128,8 @@ function createSingleDepthArray_t3r(data) {
 	return arr;
 }
 
+// Method currently duplicated in both testThree.react and testThree
+// Will be added to a shared utility file when both use the same html page
 function createZeroDepthArray_t3r(data) {
 	var arr = [];
 
@@ -132,7 +140,9 @@ function createZeroDepthArray_t3r(data) {
 	return arr;
 }
 
-function updateTreeNode(node, expanded) {
+// Method currently duplicated in both testThree.react and testThree
+// Will be added to a shared utility file when both use the same html page
+function updateTreeNode_t3r(node, expanded) {
 	var children = [];
 
 	if(expanded) {
@@ -177,6 +187,15 @@ function updateTreeNode(node, expanded) {
 		}
 	}
 
+	logCurrentTime_t3r();
 	React.render(<TreeNodeList data={initialFolderData}/>,
 					document.getElementById("content"));
+	logCurrentTime_t3r();
+}
+
+// Method currently duplicated in both testThree.react and testThree
+// Will be added to a shared utility file when both use the same html page
+function logCurrentTime_t3r() {
+	date = new Date();
+	console.log(date.getTime());
 }
