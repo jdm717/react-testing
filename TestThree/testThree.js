@@ -1,7 +1,7 @@
 var oReq = new XMLHttpRequest();
 oReq.onload = reqListener;
 oReq.overrideMimeType("application/json");
-oReq.open("get", "fileStructure.json", true);
+oReq.open("get", "../fileStructure.json", true);
 oReq.send();
 
 function reqListener(e) {
