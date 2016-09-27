@@ -10,12 +10,11 @@ function reqListener(e) {
 	folderData = createSingleDepthArray_t3js(json);
 	initialFolderData = createZeroDepthArray_t3js(json);
 
-	logCurrentTime_t3js();
+	var startTime = getCurrentTime_t3js();
 	renderTree_t3js();
-	logCurrentTime_t3js();
+	var endTime = getCurrentTime_t3js();
+	console.log("Time render initial tree: " + (endTime-startTime).toFixed(2) + "ms");
 }
-
-var date;
 
 function renderTree_t3js() {
 	var treeContainer = document.createElement("DIV");
@@ -143,15 +142,15 @@ function updateTreeNode_t3js(id, expanded) {
 		}
 	}
 
-	logCurrentTime_t3js();
+	var startTime = getCurrentTime_t3js();
 	document.getElementById("content").removeChild(document.getElementById("content").firstChild);
 	renderTree_t3js();
-	logCurrentTime_t3js();
+	var endTime = getCurrentTime_t3js();
+	console.log("Time to expand/close node: " + ((endTime-startTime).toFixed(2) * 1000) + "\u03BCs");
 }
 
 // Method currently duplicated in both testThree.react and testThree
 // Will be added to a shared utility file when both use the same html page
-function logCurrentTime_t3js() {
-	date = new Date();
-	console.log(date.getTime());
+function getCurrentTime_t3js() {
+	return window.performance.now();
 }

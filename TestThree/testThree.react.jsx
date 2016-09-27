@@ -27,13 +27,12 @@ function reqListener(e) {
 	folderData = createSingleDepthArray_t3r(json);
 	initialFolderData = createZeroDepthArray_t3r(json);
 
-	logCurrentTime_t3r();
+	var startTime = getCurrentTime_t3r();
 	React.render(<TreeNodeList data={initialFolderData}/>,
 					document.getElementById("content"));
-	logCurrentTime_t3r();
+	var endTime = getCurrentTime_t3r();
+	console.log("Time render initial tree: " + (endTime-startTime).toFixed(2) + "ms");
 }
-
-var date;
 
 var TreeNodeList = React.createClass({
 	propTypes: {
@@ -187,15 +186,15 @@ function updateTreeNode_t3r(node, expanded) {
 		}
 	}
 
-	logCurrentTime_t3r();
+	var startTime = getCurrentTime_t3r();
 	React.render(<TreeNodeList data={initialFolderData}/>,
 					document.getElementById("content"));
-	logCurrentTime_t3r();
+	var endTime = getCurrentTime_t3r();
+	console.log("Time to expand/close node: " + ((endTime-startTime).toFixed(2) * 1000) + "μs");
 }
 
 // Method currently duplicated in both testThree.react and testThree
 // Will be added to a shared utility file when both use the same html page
-function logCurrentTime_t3r() {
-	date = new Date();
-	console.log(date.getTime());
+function getCurrentTime_t3r() {
+	return window.performance.now();
 }
