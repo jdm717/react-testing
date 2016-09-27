@@ -40,7 +40,6 @@ function createButton(numBut){
 
 function flip(){
 	var a,b;
-	debugger;
 	if(this.value == ""){
 		var whatBut = this.id.charAt(6);
 		var numBut = +whatBut;
@@ -77,15 +76,19 @@ function flip(){
 
 		matchOne.remove();
 		matchTwo.remove();
+		firstCard = "";
+		secondCard = "";
 		}
 	}
 	if(!checkMoves()){
 		alert("Game over");
+		gameOver();
 	}
 }
 
 function checkMoves(){
 	var a, b;
+	debugger;
 	if(buttons.length < 2){
 		return false;
 	}
@@ -100,4 +103,13 @@ function checkMoves(){
 	}
 
 	return false;
+}
+
+function gameOver(){
+	var a;
+	var holder;
+	for (a = 0; a < buttons.length; a++){
+		holder = document.getElementById(buttons[a].butId);
+		holder.value = buttons[a].number;
+	}
 }
