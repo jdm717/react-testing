@@ -1,9 +1,3 @@
-/*
-*
-*	Treeview created in ReactJS.
-*
-*/
-
 var Row = ReactBootstrap.Row;
 var Grid = ReactBootstrap.Grid;
 var Glyphicon = ReactBootstrap.Glyphicon;
@@ -108,8 +102,6 @@ var TreeNode = React.createClass({
 	}
 });
 
-// Method currently duplicated in both testThree.react and testThree
-// Will be added to a shared utility file when both use the same html page
 function createSingleDepthArray_t3r(data) {
 	var arr = [];
 
@@ -127,8 +119,6 @@ function createSingleDepthArray_t3r(data) {
 	return arr;
 }
 
-// Method currently duplicated in both testThree.react and testThree
-// Will be added to a shared utility file when both use the same html page
 function createZeroDepthArray_t3r(data) {
 	var arr = [];
 
@@ -139,8 +129,6 @@ function createZeroDepthArray_t3r(data) {
 	return arr;
 }
 
-// Method currently duplicated in both testThree.react and testThree
-// Will be added to a shared utility file when both use the same html page
 function updateTreeNode_t3r(node, expanded) {
 	var children = [];
 
@@ -193,8 +181,6 @@ function updateTreeNode_t3r(node, expanded) {
 	console.log("Time to expand/close node: " + ((endTime-startTime).toFixed(2) * 1000) + "μs");
 }
 
-// Method currently duplicated in both testThree.react and testThree
-// Will be added to a shared utility file when both use the same html page
 function getCurrentTime_t3r() {
 	return window.performance.now();
 }

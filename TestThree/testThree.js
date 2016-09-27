@@ -56,8 +56,6 @@ function renderTree_t3js() {
 	document.getElementById("content").appendChild(treeContainer);
 }
 
-// Method currently duplicated in both testThree.react and testThree
-// Will be added to a shared utility file when both use the same html page
 function createSingleDepthArray_t3js(data) {
 	var arr = [];
 
@@ -75,8 +73,6 @@ function createSingleDepthArray_t3js(data) {
 	return arr;
 }
 
-// Method currently duplicated in both testThree.react and testThree
-// Will be added to a shared utility file when both use the same html page
 function createZeroDepthArray_t3js(data) {
 	var arr = [];
 
@@ -95,8 +91,6 @@ function minusSignClicked_t3js(e) {
 	updateTreeNode_t3js(this.dataset.folderid, false);
 }
 
-// Method currently duplicated in both testThree.react and testThree
-// Will be added to a shared utility file when both use the same html page
 function updateTreeNode_t3js(id, expanded) {
 	var children = [];
 
@@ -149,8 +143,6 @@ function updateTreeNode_t3js(id, expanded) {
 	console.log("Time to expand/close node: " + ((endTime-startTime).toFixed(2) * 1000) + "\u03BCs");
 }
 
-// Method currently duplicated in both testThree.react and testThree
-// Will be added to a shared utility file when both use the same html page
 function getCurrentTime_t3js() {
 	return window.performance.now();
 }

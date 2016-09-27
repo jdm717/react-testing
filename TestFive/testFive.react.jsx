@@ -21,7 +21,11 @@ oReq.send();
 function reqListener(e) {
 	json = JSON.parse(this.responseText);
 
+	var startTime = getCurrentTime_t5r();
 	ReactDOM.render(<ScrollList data={json} rowHeight={42} />, document.getElementById("content"));
+	var endTime = getCurrentTime_t5r();
+
+	console.log("Initial render time: " + (endTime-startTime).toFixed(2) + "ms");
 }
 
 var ScrollList = React.createClass({
@@ -47,16 +51,17 @@ var ScrollList = React.createClass({
 		var visibleItems = [];
 		var displayedItems = this.state.elements;
 		var consoleButtonStyle;
-		var startIndex = Math.floor(this.state.startingPos - (this.state.startingPos * .25));
+		var startIndex = Math.floor(this.state.startingPos - (displayedItems) * .25);
+		if(startIndex < 0) startIndex = 0;
 
 		var i = startIndex;
-		if(i < 0) i = 0;	
-
-		while(i < displayedItems + this.state.startingPos) {
+		var count = 0;
+		while(count < displayedItems && i < this.props.data.length) {
 			visibleItems.push(
 				<ScrollItem name={this.props.data[i].name} offset={Math.floor(startIndex * this.props.rowHeight)} key={i} />
 			);
 
+			count++;
 			i++;
 		}
 
@@ -145,7 +150,7 @@ var ScrollItem = React.createClass({
 });
 
 function updateList_t5r() {
-	ReactDOM.render(<ScrollList data={json} rowHeight={30} />, document.getElementById("content"));
+	ReactDOM.render(<ScrollList data={json} rowHeight={42} />, document.getElementById("content"));
 }
 
 function getCurrentTime_t5r() {
