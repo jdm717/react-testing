@@ -115,11 +115,15 @@ var ButtonGrid = React.createClass({
 		gamesPlayed++;
 		data = shuffleArray_t2r(data);
 
+		var startTime = getCurrentTime_t2r();
 		this.setState({
 			value: null,
 			lastId: null,
 			correct: []
 		});
+		var endTime = getCurrentTime_t2r();
+
+		console.log("Reset time: " + (endTime-startTime).toFixed(2) + "ms");
 	}
 });
 
@@ -190,7 +194,6 @@ function shuffleArray_t2r(data) {
 		arr[firstIndex].glyph = tmp;
 	}
 
-	console.log(arr);
 	return arr;
 }
 
