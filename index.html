@@ -19,26 +19,57 @@
 
     </script>
 
-    <!-- stuff for old browser support -->
-    <!--[if lt IE 9]>
-    <script>
-      (function(){
-        var ef = function(){};
-        window.console = window.console || {log:ef,warn:ef,error:ef,dir:ef};
-      }());
-    </script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv-printshiv.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/es5-shim/3.4.0/es5-shim.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/es5-shim/3.4.0/es5-sham.js"></script>
-  <![endif]-->
   </head>
   <body>
 
-    <div id="demo"></div>
-    <div id="dummy"></div>
+    <div class="panel panel-default" style="margin-bottom: 0px">
+        <div class="panel-heading">
+            <h4>React vs JS render timing</h4>
+        </div>
+        <div class="panel-body">
+            <a href="./TestOne/testOne.Js.html">Test One JS</a>
+            <span>(Large Data: Loading 50,000 button elements)</span>
+            <br/>
+            <a href="./TestOne/testOne.react.html">Test One React</a>
+            <span>(Large Data: Loading 50,000 button elements)</span>
+        </div>
+    </div>
+    <div class="panel panel-default" style="margin-bottom: 0px">
+        <div class="panel-body">
+            <a href="./TestTwo/testTwo.Js.html">Test Two JS</a>
+            <span>(Memory game)</span>
+            <br/>
+            <a href="./TestTwo/testTwoReact.html">Test Two React</a>
+            <span>(Memory game)</span>
+        </div>
+    </div>
+    <div class="panel panel-default" style="margin-bottom: 0px">
+        <div class="panel-body">
+            <a href="./TestThree/testThreeJs.html">Test Three JS</a>
+            <span>(Treeview)</span>
+            <br/>
+            <a href="./TestThree/testThreeReact.html">Test Three React</a>
+            <span>(Treeview)</span>
+        </div>
+    </div>
+    <div class="panel panel-default" style="margin-bottom: 0px">
+        <div class="panel-body">
+            <a href="./TestFour/testFour.Js.html">Test Four JS</a>
+            <span>(Adding and removing data)</span>
+            <br/>
+            <a href="./TestFour/testFourReact.html">Test Four React</a>
+            <span>(Adding and removing data)</span>
+        </div>
+    </div>
+    <div class="panel panel-default" style="margin-bottom: 0px">
+        <div class="panel-body">
+            <a href="./TestFive/testFiveJs.html">Test Five JS</a>
+            <span>(Dynamic scrolling: Loading a fraction(based on screen size) of a 10000 item list)</span>
+            <br/>
+            <a href="./TestFive/testFiveReact.html">Test Five React</a>
+            <span>(Dynamic scrolling: Loading a fraction(based on screen size) of a 10000 item list)</span>
+        </div>
+    </div>
 
-    <script src="playground.jsx" type="text/jsx"></script>
   </body>
 </html>

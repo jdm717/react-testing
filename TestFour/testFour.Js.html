@@ -1,12 +1,20 @@
 <html>
 <head>
-<title>Test Four</title>
+<title>AddRemove-js</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 </head>
 
 <body>
-<input type = "text" id = "numItems"></input>
-<button type ="button" id = "addItems" onclick = "additems()" >Add items</button>
-<button type ="button" id = "removeItems" onclick = "removeitems()" >Remove Items</button>
+<span>Enter a number of elements to add or remove: </span>
+<div class="input-group" style="display: inline-block">
+	<input type="text" id="numItems" style="width: 500px"></input>
+</div>
+<button class="btn btn-default" type ="button" id = "addItems" onclick = "addItems()" >
+	<span class="glyphicon glyphicon-plus"/>
+</button>
+<button class="btn btn-default" type ="button" id = "removeItems" onclick = "removeItems()" >
+	<span class="glyphicon glyphicon-minus"/>
+</button>
 <div id = "screen">
 </div>
 <script src = "testFour.js" type="text/javascript"></script>

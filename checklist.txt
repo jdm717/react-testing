@@ -1,0 +1,32 @@
+Checklist
+Jeff Murray
+Val Chapman
+
+
+1. To make sure that the jsx code runs correctly you will need a server simulated on your computer. We personally used the SimpleHTTPServer command in python 2.7. This should be run from the react-bs directory.
+
+3. Each test has its own separate HTML file associated with it. For ease of accessing them, they have all been linked from index.html. This is located directly under the react-bs directory.
+
+
+4. We wrote two tests for each test. One is in JS the other in JSX. These are found in the folders named after the test we designated, ex. Test Four.
+
+
+5. Check at implementations of Test Three, Test Two, and Test Five for complexity in this project.
+
+
+6. Check section of Bloom’s Taxonomy for detailed analysis and evaluation. 
+        (Charts were based off of data which can be found as PNG in each test folder)
+
+
+7. Check Developer Tools Console for time display of each function.
+
+8. Particular complexities for Test Three, Test Two, and Test Five are shown at the following lines in each listed file:
+   a. Test Three
+      i. Line 94 in testThree.js shows the method used to update tree data based on expansion.
+      ii. Similarly, line 132 in testThree.react.jsx shows a nearly identical method to update the data based on expansion for that file.
+   b. Test Two
+      i. Line 46 in testTwo.js shows the method used to handle flipping cards, and line 207 shows the method used to set new button properties based on that flip.
+      ii. Line 83 in testTwo.react.jsx shows the flip handling method for the react version, and line 178 shows associated methods in the child component.
+   c. Test Five
+      i. Line 28 in testFive.js shows the rendering method for the dynamic list, and involves logic to determine the position and elements to render.
+      ii. Line 50 in testFive.react.jsx shows the render method of the ScrollList component, which similarly contains logic to determine the position and elements to render.

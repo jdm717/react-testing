@@ -1,0 +1,45 @@
+<html>
+<head>
+<title>AddRemove-react</title>
+<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+    <!-- bootstrap - latest version of CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <!-- react - latest version -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/react.js"></script>
+    <!-- jsx transformer - needed for development mode -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/JSXTransformer.js"></script>
+
+    
+    <script src="../react-bootstrap/react-bootstrap.min.js">
+
+    </script>
+</head>
+
+
+<body>
+<span>Enter a number of elements to add or remove: </span>
+<div class="input-group" style="display: inline-block">
+    <input type="text" id="numItems" style="width: 500px"></input>
+</div>
+<button class="btn btn-default" type ="button" id = "addItems">
+    <span class="glyphicon glyphicon-plus"/>
+</button>
+<button class="btn btn-default" type ="button" id = "removeItems">
+    <span class="glyphicon glyphicon-minus"/>
+</button>
+<div id = "screen">
+</div>
+
+<script src="testFour.react.jsx" type="text/jsx"></script>
+<script type="text/jsx">
+    start_t4r();
+</script>
+
+</body>
+</html>

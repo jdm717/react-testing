@@ -4,7 +4,7 @@ var firstId = "";
 var secondCard = "";
 
 var glyphs = ["star", "star-empty", "heart", "cog", "leaf", "tower", "apple", "flash", "heart-empty", "fire"];
-var bestScore = 0;
+var bestScore = 100;
 var gamesPlayed = 0;
 var moves = 0;
 
