@@ -1,94 +1,112 @@
 var buttons = [];
 var firstCard = "";
+var firstId = "";
 var secondCard = "";
 
-function setup(){
+var glyphs = ["star", "star-empty", "heart", "cog", "leaf", "tower", "apple", "flash", "heart-empty", "fire"];
+var bestScore = 0;
+var gamesPlayed = 0;
+var moves = 0;
+
+function setup_t2js(skipCreateButtonArr) {
+	var startTime = getCurrentTime_t2js();
 	var holder = document.getElementById("matchGame");
-	var i;
-	createButtonArray();
-	for(i = 0; i < 20; i++){
-			
-			holder.appendChild(buttons[i].cardBt);
+	var grid = document.createElement("DIV");
+	grid.className = "container";
+	grid.style.margin = "0 0 0 0";
+	grid.style.padding = "0 0 0 0";
+	grid.style.width = "80%";
+	grid.style.display = "inline-block";
+
+	if(!skipCreateButtonArr) createButtonArray_t2js();
+	else holder.innerHTML = "";
+
+	for(var i = 0; i < 20; i++){
+		grid.appendChild(buttons[i]);
 	}
+
+	holder.appendChild(grid);
+	holder.appendChild(createPanel_t2js());
+	var endTime = getCurrentTime_t2js();
+	if(!skipCreateButtonArr) console.log("Render time: " + (endTime-startTime).toFixed(2) + "ms");
 }
 
-function createButtonArray(){
-	var i;
-	for(i = 0; i < 20; i++){
-		buttons[i] = createButton(i);
-		console.log(buttons[i].number);
+function createButtonArray_t2js() {
+	for(var i = 0; i < 20; i++){
+		var j = i;
+		if(j >= 10) j = i - 10;
+
+		buttons[i] = createButton_t2js(false, glyphs[j], "button" + i, true, true);
 	}
+
+	buttons = shuffleArray_t2js(buttons);
 }
 
-function createButton(numBut){
-	var button = document.createElement("input");
-	var card;
-	button.type = "button";
-	button.value = "";
-	button.onclick = flip;
-	button.id = "button" + numBut;
-	button.style = "width: 100px; height: 150px; padding: 20px 50px;";
-	card = {
-		flipped: 0,
-		number: (Math.floor(Math.random() * 10) + 1),
-		cardBt : button,
-		butId : button.id,
+function flip_t2js() {
+	if(firstCard !== "" && secondCard !== "") return;
 
-	};
-	return card;
-}
-
-function flip(){
 	var a,b;
-	if(this.value == ""){
-		var whatBut = this.id.charAt(6);
-		var numBut = +whatBut;
-		this.value = buttons[numBut].number;
-	}
-	else{
-		this.value = "";
-	}
+	var id = this.id;
+	var startTime = getCurrentTime_t2js();
+	setButtonProperty_t2js("visibility", true, id);
+	var endTime;
 
-	if(firstCard == ""){
-		firstCard = this.id;
-	}
+	moves++;
 
-	else if(firstCard != ""){
-		if(secondCard != ""){
-			var hideCard = document.getElementById(secondCard);
-			hideCard.value = "";
-		}
-		secondCard = firstCard;
-		firstCard = this.id;
-	}
-	if(secondCard != ""){
-		var matchOne = document.getElementById(firstCard);
-		var matchTwo = document.getElementById(secondCard);
-		if(matchOne.value == matchTwo.value){
-			for(a = 0; a < buttons.length; a++){
-				if(buttons[a].butId == firstCard){
-					buttons.splice(a,1);
-				}
-				if(buttons[a].butId == secondCard){
-					buttons.splice(a,1);
-				}
-			}
+	if(firstCard === "") {
+		firstCard = this.firstChild.className;
+		firstId = id;
 
-		matchOne.remove();
-		matchTwo.remove();
+		endTime = getCurrentTime_t2js();
+		console.log("Flip time: " + (endTime-startTime).toFixed(2) + "ms");
+
+		return;
+	}
+	else if(secondCard === "") secondCard = this.firstChild.className;
+
+	if(firstCard === secondCard) {
+		setButtonProperty_t2js("success", true, firstId);
+		setButtonProperty_t2js("success", true, id);
+
+		firstId = "";
 		firstCard = "";
 		secondCard = "";
-		}
 	}
-	if(!checkMoves()){
-		alert("Game over");
-		gameOver();
+	else {
+		setTimeout(function() { setButtonProperty_t2js("visibility", false, firstId); }, 1000);
+		setTimeout(function() { setButtonProperty_t2js("visibility", false, id); }, 1000);
+
+		setTimeout(function() {
+			firstId = "";
+			firstCard = "";
+			secondCard = "";
+		}, 1000);
 	}
+
+	endTime = getCurrentTime_t2js();
+
+	console.log("Flip time: " + (endTime-startTime).toFixed(2) + "ms");
+}
+
+function reset_t2js() {
+	firstId = "";
+	firstCard = "";
+	secondCard = "";
+
+	if(moves <= bestScore && moves >= 20) bestScore = Math.floor(moves * .5);
+	gamesPlayed++;
+	moves = 0;
+
+	var startTime = getCurrentTime_t2js();
+	setup_t2js(false);
+	var endTime = getCurrentTime_t2js();
+
+	console.log("Reset time: " + (endTime-startTime).toFixed(2) + "ms");
 }
 
 function checkMoves(){
 	var a, b;
-	debugger;
+
 	if(buttons.length < 2){
 		return false;
 	}
@@ -112,4 +130,108 @@ function gameOver(){
 		holder = document.getElementById(buttons[a].butId);
 		holder.value = buttons[a].number;
 	}
+}
+
+function createButton_t2js(success, glyph, id, hidden, isSetup) {
+	var button = document.createElement("BUTTON");
+	var glyphicon = document.createElement("SPAN");
+
+	button.id = id;
+	button.className = success ? "btn btn-success" : "btn btn-primary";
+	button.style.height = window.innerHeight * .25;
+	button.style.width = (window.innerWidth * .8) * .2;
+	button.onclick = flip_t2js;
+	if(isSetup) glyphicon.className = "glyphicon glyphicon-" + glyph;
+	else glyphicon.className = glyph;
+	glyphicon.style.visibility = hidden ? "hidden" : "visible";
+
+	button.appendChild(glyphicon);
+
+	return button;
+}
+
+function createPanel_t2js() {
+	var panel = document.createElement("DIV");
+	var panelHeading = document.createElement("DIV");
+	var panelBody = document.createElement("DIV");
+	var span1 = document.createElement("SPAN");
+	var span2 = document.createElement("SPAN");
+	var button = document.createElement("BUTTON");
+
+	panel.className = "panel panel-default";
+	panel.style.display = "inline-block";
+	panel.style.height = "100%";
+	panel.style.width = "20%";
+	panel.style.position = "absolute";
+	panel.style.top = "0";
+	panel.style.margin = "0 0 0 0";
+	panelHeading.className = "panel-heading";
+	panelHeading.innerHTML = "Scores";
+	panelBody.className = "panel-body";
+	span1.innerHTML = "Games played: " + gamesPlayed;
+	span2.innerHTML = "Best score: " + bestScore;
+	button.className = "btn btn-default";
+	button.setAttribute("type", "button");
+	button.innerHTML = "Reset";
+	button.onclick = reset_t2js;
+
+	panelBody.appendChild(span1);
+	panelBody.appendChild(document.createElement("BR"));
+	panelBody.appendChild(span2);
+	panelBody.appendChild(document.createElement("BR"));
+	panelBody.appendChild(document.createElement("BR"));
+	panelBody.appendChild(document.createElement("BR"));
+	panelBody.appendChild(button);
+	panel.appendChild(panelHeading);
+	panel.appendChild(panelBody);
+
+	return panel;
+}
+
+function shuffleArray_t2js(data) {
+	var arr = data.slice(0);
+
+	for(var i = 0; i < data.length * 5; i++) {
+		var firstIndex = Math.floor(Math.random() * 10);
+		var secondIndex = Math.floor(Math.random() * 10) + 9;
+
+		var tmp = arr[secondIndex];
+		arr[secondIndex] = arr[firstIndex];
+		arr[firstIndex] = tmp;
+	}
+
+	return arr;
+}
+
+function setButtonProperty_t2js(property, value, id) {
+	var currentButton;
+	var index = -1;
+
+	for(var key in buttons) {
+		if(buttons[key].id === id) {
+			index = parseInt(key);
+			currentButton = buttons[key];
+
+			break;
+		}
+	}
+
+	var newButton;
+	var success;
+	if(currentButton.className.includes("success")) success = true;
+	else success = false;
+	if(property === "success") {
+		newButton = createButton_t2js(value, currentButton.firstChild.className, id, currentButton.style.visibility);
+	}
+	else if(property === "visibility") {
+		newButton = createButton_t2js(success, currentButton.firstChild.className, id, !value);
+	}
+
+	buttons[index] = newButton;
+
+	this.setup_t2js(true);
+}
+
+function getCurrentTime_t2js() {
+	return window.performance.now();
 }

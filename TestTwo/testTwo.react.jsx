@@ -8,6 +8,9 @@ var bestScore = 0;
 var gamesPlayed = 0;
 var moves = 0;
 
+var firstCard = "";
+var secondCard = "";
+
 var data = [];
 
 function start_t2r() {
@@ -84,13 +87,16 @@ var ButtonGrid = React.createClass({
 				lastId: id
 			});
 		}
-		else if(value === this.state.value) {
+		else if(value === this.state.value && id !== this.state.lastId) {
 			var correct = this.state.correct;
 
 			correct.push(value);
 
 			this.refs[id].setCorrect();
 			this.refs[this.state.lastId].setCorrect();
+
+			firstCard = "";
+			secondCard = "";
 
 			this.setState({
 				correct: correct,
@@ -103,6 +109,7 @@ var ButtonGrid = React.createClass({
 
 			setTimeout(function() { that.refs[id].flipCard(); }, 1000);
 			setTimeout(function() { that.refs[that.state.lastId].flipCard(); }, 1000);
+			setTimeout(function() { firstCard = ""; secondCard = ""; }, 1005);
 
 			this.setState({
 				value: null
@@ -110,10 +117,12 @@ var ButtonGrid = React.createClass({
 		}
 	},
 	_resetGame: function() {
-		if(moves > bestScore) bestScore = moves;
+		if(moves < bestScore && moves >= 20) bestScore = Math.floor(moves * .5);
 		moves = 0;
 		gamesPlayed++;
 		data = shuffleArray_t2r(data);
+		firstCard = "";
+		secondCard = "";
 
 		var startTime = getCurrentTime_t2r();
 		this.setState({
@@ -121,6 +130,10 @@ var ButtonGrid = React.createClass({
 			lastId: null,
 			correct: []
 		});
+		for(var key in this.refs) {
+			this.refs[key].state.visible = false;
+			this.refs[key].state.isCorrect = false;
+		}
 		var endTime = getCurrentTime_t2r();
 
 		console.log("Reset time: " + (endTime-startTime).toFixed(2) + "ms");
@@ -168,6 +181,10 @@ var MemoryCard = React.createClass({
 		});
 	},
 	_onClickFlipCard: function(e) {
+		if(firstCard === "") firstCard = this.props.glyph;
+		else if(secondCard === "") secondCard = this.props.glyph;
+		else return;
+
 		var startTime = getCurrentTime_t2r();
 		this.setState({
 			visible: !this.state.visible
