@@ -19,7 +19,8 @@ function setup_t2js(skipCreateButtonArr) {
 	grid.style.display = "inline-block";
 
 	if(!skipCreateButtonArr) createButtonArray_t2js();
-	else holder.innerHTML = "";
+	
+	holder.innerHTML = "";
 
 	for(var i = 0; i < 20; i++){
 		grid.appendChild(buttons[i]);
